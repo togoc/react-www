@@ -1,0 +1,118 @@
+.home {
+    width           : 100vw;
+    height          : 100vh;
+    display         : flex;
+    flex-direction  : row;
+    flex-wrap       : wrap;
+    justify-content : space-around;
+    align-items     : center;
+    background-color: gray;
+
+
+
+    div.demo_item {
+        position         : relative;
+        color            : #fff;
+        cursor           : pointer;
+        display          : flex;
+        width            : 100%;
+        height           : 100%;
+        max-width        : 30vw;
+        max-height       : 25vh;
+        background-color : #fff;
+        overflow         : hidden;
+        background-repeat: no-repeat;
+        background-size  : cover;
+
+
+
+
+
+        &:hover {
+            div.demo_item_detail {
+                top: 0;
+            }
+
+            div.bg {
+                opacity: .5;
+            }
+        }
+
+        div.bg {
+            position        : absolute;
+            transition      : all .2s linear;
+            opacity         : 0;
+            background-color: #000;
+            width           : 100%;
+            height          : 100%;
+            z-index         : 1;
+        }
+
+        div.demo_item_detail {
+            z-index        : 2;
+            transition     : all .2s linear;
+            position       : relative;
+            display        : flex;
+            top            : 50%;
+            left           : 0;
+            width          : 100%;
+            height         : 100%;
+            font-size      : 1.2rem;
+            flex-direction : column;
+            justify-content: center;
+
+
+
+
+            div.title-outer {
+                display: flex;
+                height : 100%;
+                width  : 100%;
+
+                span.title {
+                    display   : -webkit-box;
+                    height    : 100%;
+                    width     : 100%;
+                    padding   : .5rem;
+                    box-sizing: border-box;
+                }
+            }
+
+            div.main-outer {
+                display: flex;
+                height : 100%;
+                width  : 100%;
+
+
+
+                span.main {
+                    display   : block;
+                    height    : 100%;
+                    width     : 100%;
+                    box-sizing: border-box;
+                    padding   : .5rem;
+                }
+            }
+
+            span.title {}
+
+            span.main {}
+        }
+
+        @media(max-width:500px) {
+            background-color: red;
+            width           : 100%;
+            max-width       : 260px;
+            max-height      : 35vw;
+            margin          : 7px 10px;
+
+            div.demo_item_detail {
+                top: 0;
+            }
+
+            div.bg {
+                opacity: .5;
+            }
+        }
+    }
+}
