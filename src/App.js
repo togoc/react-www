@@ -17,17 +17,21 @@ class App extends React.Component {
               return <Redirect to="/login" />
           }} path="/" /> */}
           <Switch>
-            <Route path="/home" component={Home}></Route>
-            <Route path="/admin" component={Admin}></Route>
-            <Route path="/login" component={Login} exact></Route>
-            <Route path="/register" component={Register} exact></Route>
-            <Redirect form="/" to="/home" exact />
+            <Route path="/" component={Home} exact></Route>
+            <Route path="/admin" component={Admin} ></Route>
+            <Route path="/login" component={Login}  ></Route>
+            <Route path="/register" component={Register}  ></Route>
+            {/* <Redirect to="/home" form="/"  /> */}
           </Switch>
         </BrowserRouter>
       </Provider>
     )
   }
 }
+
+
+
+
 
 
 export default App;
