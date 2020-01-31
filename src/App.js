@@ -21,6 +21,7 @@ class App extends React.Component {
             <Route path="/admin" component={Admin}></Route>
             <Route path="/login" component={Login} exact></Route>
             <Route path="/register" component={Register} exact></Route>
+            <Redirect form="/" to="/home" exact />
           </Switch>
         </BrowserRouter>
       </Provider>

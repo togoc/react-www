@@ -1,113 +1,203 @@
-.home {
+div.home {
     width           : 100vw;
     height          : 100vh;
     display         : flex;
-    flex-direction  : row;
-    flex-wrap       : wrap;
-    justify-content : space-around;
     align-items     : center;
+    justify-content : center;
     background-color: gray;
+    overflow        : hidden;
+
+
+    div.home_outer {
+        width           : 100%;
+        height          : 100%;
+        display         : flex;
+        flex-direction  : row;
+        flex-wrap       : wrap;
+        justify-content : space-around;
+        align-items     : center;
+        background-color: gray;
+        overflow        : auto;
+
+        a.demo_item {
+            position         : relative;
+            color            : #fff;
+            cursor           : pointer;
+            display          : flex;
+            width            : 100%;
+            height           : 100%;
+            max-width        : 30vw;
+            max-height       : 25vh;
+            min-width        : 225px;
+            background-color : #fff;
+            overflow         : hidden;
+            background-repeat: no-repeat;
+            background-size  : cover;
 
 
 
-    div.demo_item {
-        position         : relative;
-        color            : #fff;
-        cursor           : pointer;
-        display          : flex;
-        width            : 100%;
-        height           : 100%;
-        max-width        : 30vw;
-        max-height       : 25vh;
-        background-color : #fff;
-        overflow         : hidden;
-        background-repeat: no-repeat;
-        background-size  : cover;
 
 
+            &:hover {
+                div.demo_item_detail {
+                    top: 0;
+                }
 
+                div.bg {
+                    opacity: .5;
+                }
 
-
-        &:hover {
-            div.demo_item_detail {
-                top: 0;
             }
 
             div.bg {
-                opacity: .5;
+                position        : absolute;
+                transition      : all .2s linear;
+                opacity         : 0;
+                background-color: #000;
+                width           : 100%;
+                height          : 100%;
+                z-index         : 1;
             }
-        }
-
-        div.bg {
-            position        : absolute;
-            transition      : all .2s linear;
-            opacity         : 0;
-            background-color: #000;
-            width           : 100%;
-            height          : 100%;
-            z-index         : 1;
-        }
-
-        div.demo_item_detail {
-            z-index        : 2;
-            transition     : all .2s linear;
-            position       : relative;
-            display        : flex;
-            top            : 50%;
-            left           : 0;
-            width          : 100%;
-            height         : 100%;
-            font-size      : 1.2rem;
-            flex-direction : column;
-            justify-content: center;
-
-
-
-
-            div.title-outer {
-                display: flex;
-                height : 100%;
-                width  : 100%;
-
-                span.title {
-                    display   : -webkit-box;
-                    height    : 100%;
-                    width     : 100%;
-                    padding   : .5rem;
-                    box-sizing: border-box;
-                }
-            }
-
-            div.main-outer {
-                display: flex;
-                height : 100%;
-                width  : 100%;
-
-
-
-                span.main {
-                    display   : block;
-                    height    : 100%;
-                    width     : 100%;
-                    box-sizing: border-box;
-                    padding   : .5rem;
-                }
-            }
-        }
-
-        @media(max-width:500px) {
-            background-color: red;
-            width           : 100%;
-            max-width       : 260px;
-            max-height      : 35vw;
-            margin          : 7px 10px;
 
             div.demo_item_detail {
-                top: 0;
+                z-index        : 2;
+                transition     : all .2s linear;
+                position       : relative;
+                display        : flex;
+                top            : 50%;
+                left           : 0;
+                width          : 100%;
+                height         : 100%;
+                font-size      : 1rem;
+                flex-direction : column;
+                justify-content: center;
+                line-height    : 1em;
+                overflow       : hidden;
+
+
+
+
+                div.title-outer {
+                    display        : flex;
+                    height         : 100%;
+                    overflow       : hidden;
+                    justify-content: center;
+                    align-items    : center;
+                    width          : 100%;
+                    padding        : .5em;
+
+                    span.title {
+                        max-height        : 48px;
+                        height            : 100%;
+                        width             : 100%;
+                        box-sizing        : border-box;
+                        text-overflow     : ellipsis;
+                        display           : -webkit-box;
+                        -webkit-line-clamp: 3; // 控制多行的行数
+                        overflow          : hidden;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+
+                div.main-outer {
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+                    height         : 100%;
+                    overflow       : hidden;
+                    width          : 100%;
+                    padding        : .5em;
+                    flex-direction : row;
+
+
+                    span.main {
+                        line-height       : 1em;
+                        display           : block;
+                        height            : 100%;
+                        width             : 100%;
+                        box-sizing        : border-box;
+                        max-height        : 32px;
+                        text-overflow     : ellipsis;
+                        display           : -webkit-box;
+                        -webkit-line-clamp: 2; // 控制多行的行数
+                        overflow          : hidden;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    a {
+                        display        : flex;
+                        flex-direction : row;
+                        justify-content: center;
+                        align-items    : center;
+                        width          : 100%;
+
+                        span {
+                            text-align    : center;
+                            color         : #fff;
+                            letter-spacing: 1px;
+                        }
+                    }
+                }
             }
 
-            div.bg {
-                opacity: .5;
+            @media(max-width:500px) {
+                background-color: red;
+                width           : 100%;
+                height          : 100%;
+                max-width       : 90vw;
+                max-height      : 25vh;
+                margin          : 7px 10px;
+
+                div.demo_item_detail {
+                    line-height: 1.5em;
+                    top        : 0;
+
+
+                    div.title-outer {
+                        span.title {
+                            max-height        : 50px;
+                            -webkit-line-clamp: 2; // 控制多行的行数
+                        }
+                    }
+
+                    div.main-outer {
+                        span.main {}
+                    }
+                }
+
+                div.bg {
+                    opacity: .5;
+                }
+            }
+
+            @media(max-width:1024px) and (min-width:500px) {
+                background-color: red;
+                width           : 100%;
+                height          : 100%;
+                max-width       : 40vw;
+                max-height      : 25vh;
+                margin          : .5rem;
+
+                div.demo_item_detail {
+                    line-height: 1em;
+                    top        : 0;
+
+
+                    div.title-outer {
+                        span.title {
+                            max-height        : 80px;
+                            -webkit-line-clamp: 5; // 控制多行的行数
+                        }
+                    }
+
+                    div.main-outer {
+                        span.main {}
+                    }
+                }
+
+                div.bg {
+                    opacity: .5;
+                }
             }
         }
     }
