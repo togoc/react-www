@@ -11,8 +11,10 @@ module.exports = override(
     addLessLoader({
         javascriptEnabled: true,
         modifyVars: { ...themeColor },
-    }),
+    })
+    ,
     (config) => {
+        // config.output.publicPath = "/index";
         config.plugins = [
             ...config.plugins,
             new CompressionWebpackPlugin({

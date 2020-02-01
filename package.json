@@ -1,5 +1,6 @@
 {
     "name": "demo2",
+    "homepage": ".",
     "version": "0.1.0",
     "proxy": "http://localhost:80",
     "private": true,

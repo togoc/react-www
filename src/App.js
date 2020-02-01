@@ -17,11 +17,16 @@ class App extends React.Component {
               return <Redirect to="/login" />
           }} path="/" /> */}
           <Switch>
-            <Route path="/" component={Home} exact></Route>
+            {/* <Route path="/index/home" component={Home} ></Route>
+            <Route path="/index/admin" component={Admin} ></Route>
+            <Route path="/index/login" component={Login}  ></Route>
+            <Route path="/index/register" component={Register}  ></Route>
+            <Redirect to="/index/home" from="/index" /> */}
+            <Route path="/home" component={Home} ></Route>
             <Route path="/admin" component={Admin} ></Route>
             <Route path="/login" component={Login}  ></Route>
             <Route path="/register" component={Register}  ></Route>
-            {/* <Redirect to="/home" form="/"  /> */}
+            <Redirect to="/home" from="/" />
           </Switch>
         </BrowserRouter>
       </Provider>
