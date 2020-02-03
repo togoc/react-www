@@ -33,3 +33,8 @@ export const login = async (formData) => {
 
 
 
+export const getChartData = async () => {
+    return ajax.get('/index/chart').then(res => res.data)
+}
+
+

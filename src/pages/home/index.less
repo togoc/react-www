@@ -1,4 +1,5 @@
 div.home {
+    user-select     : none;
     width           : 100vw;
     height          : 100vh;
     display         : flex;
@@ -7,6 +8,21 @@ div.home {
     background-color: #a1a1a1;
     overflow        : hidden;
 
+    //轨道
+    ::-webkit-scrollbar-track {
+        background-color: #a1a1a1;
+    }
+
+    ::-webkit-scrollbar {
+        width           : .5em;
+        background-color: #fff;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background   : #a1a1a1;
+    }
 
     div.home_outer {
         width          : 100%;
@@ -18,14 +34,18 @@ div.home {
         align-items    : center;
         overflow       : auto;
 
+
+
         a.demo_item {
+            z-index          : 0;
             position         : relative;
             color            : #fff;
             cursor           : pointer;
             display          : flex;
+            margin           : 0.25em;
             width            : 100%;
             height           : 100%;
-            max-width        : 30vw;
+            max-width        : 415px;
             max-height       : 25vh;
             min-width        : 300px;
             overflow         : hidden;
@@ -45,7 +65,6 @@ div.home {
 
 
             &:hover {
-
 
 
                 div.demo_item_detail {
@@ -160,6 +179,7 @@ div.home {
             }
 
             @media(min-width:1024px) {
+
                 &:hover {
                     box-shadow: 0 0 8px @primary-color;
 
@@ -190,6 +210,8 @@ div.home {
                 max-width       : 40vw;
                 max-height      : 25vh;
                 margin          : .5rem;
+
+
 
                 div.demo_item_detail {
                     line-height: 1em;
@@ -302,4 +324,69 @@ div.home {
 
         }
     }
+
+    @media(max-width:1024px) {
+        div.chart_outer {
+            display: none;
+        }
+
+    }
+
+    div.chart_outer {
+        width : 100%;
+        height: 100%;
+
+        div.chart {
+            width : 100%;
+            height: 100%;
+        }
+
+        div.theme {
+            position        : absolute;
+            border-radius   : 2px;
+            border          : 1px solid #e8e8e8;
+            right           : 0;
+            top             : 0;
+            margin          : 1em;
+            font-weight     : bold;
+            letter-spacing  : 1px;
+            display         : flex;
+            flex-direction  : row;
+            justify-content : center;
+            align-items     : center;
+            background-color: #a1a1a1;
+
+
+
+            span {
+                margin    : 5px;
+                color     : #fff;
+                box-sizing: border-box;
+
+                &:nth-last-of-type(-n+3) {
+                    padding: .7em;
+                }
+
+                &:nth-last-of-type(3) {
+                    background-color: #fff;
+                }
+
+                &:nth-last-of-type(2) {
+                    background-color: #000;
+                }
+
+                &:nth-last-of-type(1) {
+                    background: linear-gradient(135deg, #f0bcb9 0%, #dd6b66 50%, #759aa0 51%, #b1c6ca 100%);
+                }
+
+            }
+
+            span.active {
+                border: 2px solid blue;
+            }
+
+        }
+    }
+
+
 }

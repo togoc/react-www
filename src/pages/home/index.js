@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getChartData } from '../../api'
+import echarts from 'echarts'
+import './theme/infographic'
+import './theme/blue'
+import './theme/boder'
 import './index.less'
 // import * as Actions from '../../store/actions/article'
 class index extends Component {
@@ -7,42 +12,134 @@ class index extends Component {
         demoList: [
             {
                 id: 1,
-                title: 'demo1',
+                title: 'react-article',
                 main: 'react + react + react + reactreact + react看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来关于Module',
                 link: 'http://106.13.184.92/react-demo1/',
                 git: 'https://github.com/togoc/react',
-                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png']
+                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png'],
+                point: 36
             },
             {
                 id: 2,
-                title: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, perferendis.',
+                title: 'mallshop',
                 link: 'www',
                 main: 'react + shouldComponentUpdate + redux + thunk + react-router-dom',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png']
+                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png'],
+                point: 20
             },
             {
                 id: 3,
                 main: 'wwwwwwwwwwwwwwwwww wwww',
-                title: '看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来关于Module.exports和exports有什么区别，网上一搜一大把，但是说的都太复杂了听说exports是Module.exports对象的一个引用(reference) ^ 1，什么是引用？！…(: з」∠)',
+                title: 'vue-todo',
                 link: 'www',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png']
+                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png'],
+                point: 39
+
             },
             {
                 id: 4,
                 main: '我我我我我我我我啊啊啊',
-                title: 'demo3',
+                title: 'vue-pro',
                 link: 'www',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png']
+                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png'],
+                point: 38
             }
+        ],
+        theme: [
+            {
+                id: 1,
+                active: false,
+                value: 'boder'
+            },
+            {
+                id: 2,
+                active: false,
+                value: 'info'
+
+            },
+            {
+                id: 3,
+                active: true,
+                value: 'walden'
+
+            },
         ]
     }
+    paintChart = (str) => {
+        var myChart = echarts.init(this.refs.chart, str);
+        this.myChart = myChart
+        myChart.showLoading();
+        getChartData().then(json => {
+            this.myChart.setOption({
+                title: {
+                    text: 'NPM Dependencies'
+                },
+                animationDurationUpdate: 2000,
+                animationEasingUpdate: 'quinticInOut',
+                series: [
+                    {
+                        type: 'graph',
+                        layout: 'force',
+                        // progressiveThreshold: 700,
+                        data: json.nodes.map(function (node) {
+                            return {
+                                // x: node.x,
+                                // y: node.y,
+                                id: node.label,
+                                name: node.label,
+                                symbolSize: node.size,
+                                itemStyle: {
+                                    color: node.color
+                                }
+                            };
+                        }),
+                        edges: json.edges.map(function (edge) {
+                            return {
+                                source: edge.sourceID,
+                                target: edge.targetID
+                            };
+                        }),
+                        emphasis: {
+                            label: {
+                                position: 'right',//字体显示位置
+                                show: true //是否显示字体
+                            }
+                        },
+                        force: {
+                            gravity: 0.1,//该值越大节点越往中心点靠拢。
+                            edgeLength: 100,//边的两个节点之间的距离
+                            repulsion: 92 //节点之间的斥力因子。
 
+                        },
+                        nodeScaleRatio: 1.5,
+                        roam: true,
+                        draggable: true,
+                        focusNodeAdjacency: true,
+                        lineStyle: {
+                            width: 0.5,
+                            curveness: 0.3,
+                            opacity: 0.7
+                        }
+                    }
+                ]
+            });
+        })
+        myChart.hideLoading();
+        // myChart.on('click', function (params) {
+        //     console.log(params)
+        //     console.log("seriesIndex :", params.seriesIndex);
+        //     console.log("dataIndex :", params.dataIndex);
+        // });
+        window.onresize = myChart.resize
+
+    }
     componentDidMount() {
-        // let token = localStorage.getItem('USER_TOKEN')
-        console.log(1)
+        this.paintChart()
+
+
     }
     render() {
         return (
@@ -51,7 +148,20 @@ class index extends Component {
                     {
                         this.state.demoList.map((v, index) => {
                             return (
-                                <a href={v.link} className="demo_item" key={v.id + index} >
+                                <a href={v.link} className="demo_item" key={v.id + index}
+                                    onMouseOver={() => {
+                                        this.myChart.dispatchAction({
+                                            type: 'focusNodeAdjacency',
+                                            seriesIndex: 0,
+                                            dataIndex: v.point
+                                        })
+                                    }}
+                                    onMouseOut={() => {
+                                        this.myChart.dispatchAction({
+                                            type: 'unfocusNodeAdjacency',
+                                        })
+                                    }}
+                                >
                                     <img src={v.pic[0]} alt="" />
                                     <div className="demo_item_detail">
                                         <div className="title-outer">
@@ -74,6 +184,28 @@ class index extends Component {
                             )
                         })
                     }
+                </div>
+                <div className="chart_outer">
+                    <div ref="chart" className="chart" ></div>
+                    <div className="theme">
+                        <label ></label>
+                        <span >Theme:</span>
+                        {
+                            this.state.theme.map(v => {
+                                return <span key={v.id} className={v.active ? 'active' : ''} onClick={() => {
+                                    this.setState(() => {
+                                        this.state.theme.forEach(v1 => v1.id === v.id ? v1.active = true : v1.active = false)
+                                        return this.state.theme
+                                    }, () => {
+                                        this.myChart.dispose()
+                                        this.paintChart(v.value)
+                                        this.myChart.hideLoading()
+                                    })
+                                }
+                                } />
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
