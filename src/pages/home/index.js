@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getChartData } from '../../api'
 import echarts from 'echarts'
-import './theme/infographic'
+import './theme/black'
+import './theme/white'
 import './theme/blue'
-import './theme/boder'
 import './index.less'
 // import * as Actions from '../../store/actions/article'
 class index extends Component {
@@ -13,56 +13,56 @@ class index extends Component {
             {
                 id: 1,
                 title: 'react-article',
-                main: 'react + react + react + reactreact + react看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来关于Module',
+                main: 'react + redux + react-redux + redux-thunk + react-router-dom + axios + Antd + node + express + mongoose + MongoDB',
                 link: 'http://106.13.184.92/react-demo1/',
                 git: 'https://github.com/togoc/react',
-                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png'],
+                pic: ['http://106.13.184.92/index/img/react-article/index.png'],
                 point: 36
             },
             {
                 id: 2,
                 title: 'mallshop',
-                link: 'www',
+                link: 'http://106.13.184.92/mallshop/',
                 main: 'react + shouldComponentUpdate + redux + thunk + react-router-dom',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/swiper/banner3.png'],
+                pic: ['http://106.13.184.92/index/img/mallshop/index.png'],
                 point: 20
             },
             {
                 id: 3,
-                main: 'wwwwwwwwwwwwwwwwww wwww',
+                main: 'vue + vue-router+vuex + axios + element- ui + node + express + mongoose + bcryptjs',
                 title: 'vue-todo',
-                link: 'www',
+                link: 'http://106.13.184.92/vue-todo/',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png'],
+                pic: ['http://106.13.184.92/index/img/vue-todo/index.png'],
                 point: 39
 
             },
             {
                 id: 4,
-                main: '我我我我我我我我啊啊啊',
+                main: 'vue+ vue-router+ vuex+ axios+ element-ui+ node + express + mongoose+ MongoDB + bcryptjs+ jsonwebtoken + passport + passport - jwt',
                 title: 'vue-pro',
-                link: 'www',
+                link: 'http://106.13.184.92/vue-pro',
                 git: '1',
-                pic: ['http://192.168.3.3/mallshop/img/cate/icon_index_nav_2@2x.png'],
+                pic: ['http://106.13.184.92/index/img/mallshop/index.png'],
                 point: 38
             }
         ],
         theme: [
             {
                 id: 1,
-                active: false,
-                value: 'boder'
+                active: true,
+                value: 'white'
             },
             {
                 id: 2,
                 active: false,
-                value: 'info'
+                value: 'black'
 
             },
             {
                 id: 3,
-                active: true,
+                active: false,
                 value: 'walden'
 
             },
@@ -86,14 +86,12 @@ class index extends Component {
                         // progressiveThreshold: 700,
                         data: json.nodes.map(function (node) {
                             return {
-                                // x: node.x,
-                                // y: node.y,
                                 id: node.label,
                                 name: node.label,
                                 symbolSize: node.size,
-                                itemStyle: {
-                                    color: node.color
-                                }
+                                // itemStyle: {
+                                // color: node.color
+                                // }
                             };
                         }),
                         edges: json.edges.map(function (edge) {
@@ -112,17 +110,11 @@ class index extends Component {
                             gravity: 0.1,//该值越大节点越往中心点靠拢。
                             edgeLength: 100,//边的两个节点之间的距离
                             repulsion: 92 //节点之间的斥力因子。
-
                         },
                         nodeScaleRatio: 1.5,
                         roam: true,
                         draggable: true,
                         focusNodeAdjacency: true,
-                        lineStyle: {
-                            width: 0.5,
-                            curveness: 0.3,
-                            opacity: 0.7
-                        }
                     }
                 ]
             });
@@ -137,9 +129,7 @@ class index extends Component {
 
     }
     componentDidMount() {
-        this.paintChart()
-
-
+        this.state.theme.forEach(v => v.active === true ? this.paintChart(v.value) : false)
     }
     render() {
         return (

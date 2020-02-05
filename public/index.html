@@ -8,14 +8,94 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
+    .loading {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      position: absolute;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      background-color: rgba(0, 0, 0, .5);
+      letter-spacing: 1px;
+    }
+
+    .loading>span {
+      padding: .8em;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: loading infinite linear 3s;
+      color: #fff;
+    }
+
+    .loading>span>i {
+      display: inline-block;
+      margin-left: 3px;
+      text-align: left;
+      width: 16px;
+      animation: loading1 infinite linear 6s;
+      height: 16px;
+    }
+
+    @keyframes loading1 {
+      0% {
+        text-align: left;
+      }
+
+      25% {
+        text-align: center;
+      }
+
+      50% {
+        text-align: right;
+      }
+
+      75% {
+        text-align: center;
+      }
+
+      100% {
+        text-align: left;
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        box-shadow: 0 0 1em rgba(255, 0, 0, 0);
+      }
+
+      50% {
+        box-shadow: 0 0 1em rgb(49, 180, 180);
+      }
+
+      100% {
+        box-shadow: 0 0 1em rgba(255, 0, 0, 0)(99, 83, 83);
+      }
+    }
+  </style>
 
   <title>React App</title>
 </head>
 
-<body>
+<body onload="hideLoading()">
+  <div class="loading">
+    <span>
+      加载中<i>.</i>
+  </div>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 </body>
+<script>
+  function hideLoading() {
+    document.querySelector('.loading').style.display = 'none'
+  }
+</script>
 
 </html>
